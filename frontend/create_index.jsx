@@ -22,13 +22,20 @@ class CreateIndex extends React.Component {
   }
 
   renderInputs() {
-    let inputs = Object.keys(this.state.form).map(id => <CreateInput key={ id } inputId={ id } deleteSelf={ this.deleteChild.bind(this) }/>);
+    let inputs = Object.keys(this.state.form).map(id =>
+      <CreateInput
+        key={ id }
+        inputId={ id }
+        deleteSelf={ this.deleteChild.bind(this) }
+        question={ this.state.form[id].question }
+        type={ this.state.form[id].type }
+      />);
     return inputs;
   }
 
   addInput() {
     let form = this.state.form;
-    form[this.state.inputCount] = {};
+    form[this.state.inputCount] = { question: "", type: "Text" };
     localStorage.setItem('form', JSON.stringify(this.state.form));
     localStorage.setItem('inputCount', this.state.inputCount + 1);
     this.setState({ form, inputCount: this.state.inputCount + 1 });
