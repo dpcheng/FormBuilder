@@ -8,12 +8,15 @@ class CreateInput extends React.Component {
 
   render() {
     return (
-      <main>
-        <label>Question
-          <input type="text" ></input>
-        </label>
-        <button>Add Sub-Input</button>
-        <button>Delete</button>
+      <main className="input">
+        <div className="input-field">
+          <label>Question</label>
+          <input type="text"></input>
+        </div>
+        <div className="input-buttons">
+          <li className="button">Add Sub-Input</li>
+          <li className="button">Delete</li>
+        </div>
       </main>
     );
   }

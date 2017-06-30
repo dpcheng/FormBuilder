@@ -12,6 +12,10 @@ h1 {
   font-weight: normal;
 }
 
+li:hover {
+  cursor: pointer;
+}
+
 .nav-bar {
   display: flex;
   border-bottom: 2px solid rgb(151, 151, 151);
@@ -27,12 +31,34 @@ h1 {
   text-align: center;
 }
 
-.nav-bar > li:hover {
-  cursor: pointer;
-}
-
 .tab-selected {
   background-color: rgb(216, 216, 216);
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  border: 2px solid rgb(151, 151, 151);
+  margin: 30px 0px 30px 20px;
+  font-size: 26px;
+}
+
+.input-field {
+  display: flex;
+  margin: 20px;
+}
+
+.input-field > input {
+  margin-left: 15px;
+  width: 100%;
+  font-size: 26px;
+  border: 2px solid rgb(151, 151, 151);
+}
+
+.input-buttons {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .export-json {
