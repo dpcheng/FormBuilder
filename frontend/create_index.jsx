@@ -32,7 +32,6 @@ class CreateIndex extends React.Component {
   render() {
     return (
       <main>
-        Create Content
         <li>{JSON.stringify(this.state.form)}</li>
         { this.renderInputs() }
         <button onClick={ this.addInput.bind(this) }>Add Input</button>

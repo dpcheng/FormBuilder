@@ -19,7 +19,7 @@ class Index extends React.Component {
   selectTab(e) {
     if (e.currentTarget.textContent !== this.state.tab) {
       this.deselectTab();
-      e.currentTarget.className = "selected";
+      e.currentTarget.className = "tab-selected";
       this.setState({ tab: e.currentTarget.textContent });
     }
   }
@@ -36,12 +36,14 @@ class Index extends React.Component {
 
   render() {
     return (
-      <nav>
-        <li id="Create" className="selected" onClick={ this.selectTab }>Create</li>
-        <li id="Preview" onClick={ this.selectTab }>Preview</li>
-        <li id="Export" onClick={ this.selectTab }>Export</li>
+      <main>
+        <nav className="nav-bar">
+          <li id="Create" className="tab-selected" onClick={ this.selectTab }>Create</li>
+          <li id="Preview" onClick={ this.selectTab }>Preview</li>
+          <li id="Export" onClick={ this.selectTab }>Export</li>
+        </nav>
         { this.renderTab() }
-      </nav>
+      </main>
     );
   }
 }

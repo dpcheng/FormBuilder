@@ -1,9 +1,38 @@
+body {
+  font-family: "Helvetica";
+}
+
 li {
   list-style: none;
 }
 
-.selected {
-  color: green;
+h1 {
+  margin: 50px 0px 60px 30px;
+  font-size: 42px;
+  font-weight: normal;
+}
+
+.nav-bar {
+  display: flex;
+  border-bottom: 2px solid rgb(151, 151, 151);
+}
+
+.nav-bar > li {
+  margin: 0px 15px 0px 20px;
+  padding: 7px;
+  width: 150px;
+  border: 2px solid rgb(151, 151, 151);
+  border-bottom: 0px;
+  font-size: 26px;
+  text-align: center;
+}
+
+.nav-bar > li:hover {
+  cursor: pointer;
+}
+
+.tab-selected {
+  background-color: rgb(216, 216, 216);
 }
 
 .export-json {
@@ -11,4 +40,6 @@ li {
   font-size: 26px;
   width: 900px;
   height: 300px;
+  margin: 50px 0px 0px 20px;
+  border: 2px solid rgb(151, 151, 151);
 }
