@@ -13,6 +13,10 @@ class CreateInput extends React.Component {
           <label>Question</label>
           <input type="text"></input>
         </div>
+        <div className="input-field">
+          <label>Type</label>
+          <input type="text"></input>
+        </div>
         <div className="input-buttons">
           <li className="button">Add Sub-Input</li>
           <li className="button">Delete</li>

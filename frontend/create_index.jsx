@@ -33,7 +33,7 @@ class CreateIndex extends React.Component {
     return (
       <main>
         { this.renderInputs() }
-        <li className="button" onClick={ this.addInput.bind(this) }>Add Input</li>
+        <li className="button add-input" onClick={ this.addInput.bind(this) }>Add Input</li>
       </main>
     );
   }
