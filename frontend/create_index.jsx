@@ -5,35 +5,40 @@ import CreateInput from './create_input';
 class CreateIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {form: {}};
+    this.state = { form: {}, inputCount: 0};
     this.renderInputs = this.renderInputs.bind(this);
   }
 
   componentWillMount() {
     const prevForm = JSON.parse(localStorage.getItem('form'));
+    const inputCount = parseInt(localStorage.getItem('inputCount'));
     if (prevForm) {
-      this.setState({ form: prevForm });
+      this.setState({ form: prevForm, inputCount });
     }
   }
 
+  deleteChild(form) {
+    this.setState({ form });
+  }
+
   renderInputs() {
-    let inputs = Object.keys(this.state.form).map(id => <CreateInput key={id} />);
+    let inputs = Object.keys(this.state.form).map(id => <CreateInput key={ id } inputId={ id } deleteSelf={ this.deleteChild.bind(this) }/>);
     return inputs;
   }
 
   addInput() {
-    const inputCount = Object.keys(this.state.form).length;
     let form = this.state.form;
-    form[inputCount] = {};
-    this.setState({ form });
+    form[this.state.inputCount] = {};
     localStorage.setItem('form', JSON.stringify(this.state.form));
+    localStorage.setItem('inputCount', this.state.inputCount + 1);
+    this.setState({ form, inputCount: this.state.inputCount + 1 });
   }
 
   render() {
     return (
       <main>
         { this.renderInputs() }
-        <li className="button add-input" onClick={ this.addInput.bind(this) }>Add Input</li>
+        <li id="add-input" className="button" onClick={ this.addInput.bind(this) }>Add Input</li>
       </main>
     );
   }

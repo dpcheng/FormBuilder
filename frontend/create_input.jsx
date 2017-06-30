@@ -1,9 +1,18 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class CreateInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {deleted: false};
+  }
+
+  handleDelete() {
+    const prevForm = JSON.parse(localStorage.getItem('form'));
+    delete prevForm[this.props.inputId];
+    localStorage.setItem('form', JSON.stringify(prevForm));
+
+    this.props.deleteSelf(prevForm);
   }
 
   render() {
@@ -15,11 +24,15 @@ class CreateInput extends React.Component {
         </div>
         <div className="input-field">
           <label>Type</label>
-          <input type="text"></input>
+          <select>
+            <option>Text</option>
+            <option>Number</option>
+            <option>Yes/No</option>
+          </select>
         </div>
         <div className="input-buttons">
           <li className="button">Add Sub-Input</li>
-          <li className="button">Delete</li>
+          <li onClick={ this.handleDelete.bind(this) } className="button">Delete</li>
         </div>
       </main>
     );
