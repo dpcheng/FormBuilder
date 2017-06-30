@@ -1,9 +1,12 @@
 import React from 'react';
 
+import CreateInput from './create_input';
+
 class CreateIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {form: {}};
+    this.renderInputs = this.renderInputs.bind(this);
   }
 
   componentWillMount() {
@@ -11,6 +14,11 @@ class CreateIndex extends React.Component {
     if (prevForm) {
       this.setState({ form: prevForm });
     }
+  }
+
+  renderInputs() {
+    let inputs = Object.keys(this.state.form).map(id => <CreateInput key={id} />);
+    return inputs;
   }
 
   addInput() {
@@ -26,6 +34,7 @@ class CreateIndex extends React.Component {
       <main>
         Create Content
         <li>{JSON.stringify(this.state.form)}</li>
+        { this.renderInputs() }
         <button onClick={ this.addInput.bind(this) }>Add Input</button>
       </main>
     );
