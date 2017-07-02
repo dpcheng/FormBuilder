@@ -13,17 +13,16 @@ class SubInput extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleDelete(path, form = JSON.parse(localStorage.getItem('form'))) {
-    return e => {
-      if (path.length === 1) {
-        delete form[path[0]];
-        return form;
-      } else {
-        form[path[0]].subInputs = this.handleDelete(path.slice(1), form[path[0]].subInputs)();
-      }
-      localStorage.setItem('form', JSON.stringify(form));
+  handleDelete(e, f, path = this.state.path, form = JSON.parse(localStorage.getItem('form'))) {
+    if (path.length === 1) {
+      delete form[path[0]];
       return form;
-    };
+    } else {
+      form[path[0]].subInputs = this.handleDelete(e, f, path.slice(1), form[path[0]].subInputs);
+    }
+    this.props.deleteSelf(parseInt(path[path.length - 1]));
+    localStorage.setItem('form', JSON.stringify(form));
+    return form;
   }
 
   render() {
@@ -55,7 +54,7 @@ class SubInput extends React.Component {
         <div className="input-buttons">
           <li className="button">Add Sub-Input</li>
           <li
-            onClick={ this.handleDelete(this.props.path) }
+            onClick={ this.handleDelete }
             className="button">Delete
           </li>
         </div>

@@ -5,12 +5,23 @@ import SubInput from './sub_input.jsx';
 class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { question: this.props.question, type: this.props.type, subInputs: this.props.subInputs };
+    this.state = {
+      question: this.props.question,
+      type: this.props.type,
+      subInputs: this.props.subInputs,
+      form: JSON.parse(localStorage.getItem('form'))
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
+  deleteChild(subInputId) {
+    let subInputs = this.state.subInputs;
+    delete subInputs[subInputId];
+    this.setState({ subInputs });
+  }
+
   handleChange(field) {
-    const prevForm = JSON.parse(localStorage.getItem('form'));
+    const prevForm = this.state.form;
 
     return e => {
       if (field === "question") {
@@ -22,11 +33,12 @@ class Input extends React.Component {
       }
 
       localStorage.setItem('form', JSON.stringify(prevForm));
+      this.setState({ form: prevForm });
     };
   }
 
   addSubInput() {
-    let prevForm = JSON.parse(localStorage.getItem('form'));
+    let prevForm = this.state.form;
     let subInputsIds = Object.keys(this.props.subInputs);
     const subInputId = (subInputsIds[subInputsIds.length - 1] === undefined) ? 0 : parseInt(subInputsIds[subInputsIds.length - 1]) + 1;
 
@@ -35,7 +47,7 @@ class Input extends React.Component {
     prevForm[this.props.inputId].subInputs[subInputId] = subInputs[subInputId];
     localStorage.setItem('form', JSON.stringify(prevForm));
 
-    this.setState({ subInputs });
+    this.setState({ subInputs, form: prevForm });
   }
 
   renderSubInputs() {
@@ -47,15 +59,17 @@ class Input extends React.Component {
         type={ this.state.subInputs[id].type }
         subInputs={ {} }
         path={ [this.props.inputId, id] }
+        deleteSelf={ this.deleteChild.bind(this) }
       />
     ));
   }
 
   handleDelete() {
-    const prevForm = JSON.parse(localStorage.getItem('form'));
+    const prevForm = this.state.form;
     delete prevForm[this.props.inputId];
     localStorage.setItem('form', JSON.stringify(prevForm));
 
+    this.setState({ form: prevForm });
     this.props.deleteSelf(prevForm);
   }
 
