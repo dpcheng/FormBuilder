@@ -45,9 +45,9 @@ class Input extends React.Component {
     let subInputs = this.state.subInputs;
     subInputs[subInputId] = { condition: ["Equal", ""], question: "", type: "Text", subInputs: {} };
     prevForm[this.props.inputId].subInputs[subInputId] = subInputs[subInputId];
-    localStorage.setItem('form', JSON.stringify(prevForm));
-
     this.setState({ subInputs, form: prevForm });
+
+    localStorage.setItem('form', JSON.stringify(prevForm));
   }
 
   renderSubInputs() {
