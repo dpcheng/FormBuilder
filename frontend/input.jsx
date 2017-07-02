@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-class CreateInput extends React.Component {
+class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { question: this.props.question, type: this.props.type };
+    this.state = { question: this.props.question, type: this.props.type, subInputs: this.props.subInputs };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -34,26 +33,29 @@ class CreateInput extends React.Component {
 
   render() {
     return (
-      <main className="input">
-        <div className="input-field">
-          <label>Question</label>
-          <input onChange={ this.handleChange("question") } type="text" defaultValue={ this.state.question }></input>
-        </div>
-        <div className="input-field">
-          <label>Type</label>
-          <select onChange={ this.handleChange("type" )} defaultValue={ this.state.type }>
-            <option>Text</option>
-            <option>Number</option>
-            <option>Yes/No</option>
-          </select>
-        </div>
-        <div className="input-buttons">
-          <li className="button">Add Sub-Input</li>
-          <li onClick={ this.handleDelete.bind(this) } className="button">Delete</li>
-        </div>
+      <main>
+        <main className="input">
+          <div className="input-field">
+            <label>Question</label>
+            <input onChange={ this.handleChange("question") } type="text" defaultValue={ this.state.question }></input>
+          </div>
+          <div className="input-field">
+            <label>Type</label>
+            <select onChange={ this.handleChange("type" )} defaultValue={ this.state.type }>
+              <option>Text</option>
+              <option>Number</option>
+              <option>Yes/No</option>
+            </select>
+          </div>
+          <div className="input-buttons">
+            <li className="button">Add Sub-Input</li>
+            <li onClick={ this.handleDelete.bind(this) } className="button">Delete</li>
+          </div>
+        </main>
+
       </main>
     );
   }
 }
 
-export default CreateInput;
+export default Input;

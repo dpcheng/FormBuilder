@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CreateInput from './create_input';
+import Input from './input';
 
 class CreateIndex extends React.Component {
   constructor(props) {
@@ -23,19 +23,20 @@ class CreateIndex extends React.Component {
 
   renderInputs() {
     let inputs = Object.keys(this.state.form).map(id =>
-      <CreateInput
+      <Input
         key={ id }
         inputId={ id }
         deleteSelf={ this.deleteChild.bind(this) }
         question={ this.state.form[id].question }
         type={ this.state.form[id].type }
+        subInputs={ this.state.form[id].subInputs }
       />);
     return inputs;
   }
 
   addInput() {
     let form = this.state.form;
-    form[this.state.inputCount] = { question: "", type: "Text" };
+    form[this.state.inputCount] = { question: "", type: "Text", subInputs: {} };
     localStorage.setItem('form', JSON.stringify(this.state.form));
     localStorage.setItem('inputCount', this.state.inputCount + 1);
     this.setState({ form, inputCount: this.state.inputCount + 1 });
