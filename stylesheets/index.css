@@ -2,6 +2,10 @@ body {
   font-family: "Helvetica";
 }
 
+main {
+  position: relative;
+}
+
 li {
   list-style: none;
 }

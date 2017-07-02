@@ -75,7 +75,7 @@ class Input extends React.Component {
 
   render() {
     return (
-      <main>
+      <main className="tab">
         <main className="input">
           <div className="input-field">
             <label>Question</label>
