@@ -8,7 +8,7 @@ class SubInput extends React.Component {
 
   render() {
     return (
-      <main>hi</main>
+      <main>subinput</main>
     );
   }
 }

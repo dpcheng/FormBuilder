@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SubInput from './sub_input.jsx';
+
 class Input extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,25 @@ class Input extends React.Component {
 
       localStorage.setItem('form', JSON.stringify(prevForm));
     };
+  }
+
+  addSubInput() {
+    let prevForm = JSON.parse(localStorage.getItem('form'));
+    let subInputsIds = Object.keys(this.props.subInputs);
+    const subInputId = (subInputsIds[subInputsIds.length - 1] === undefined) ? 0 : parseInt(subInputsIds[subInputsIds.length - 1]) + 1;
+
+    let subInputs = this.state.subInputs;
+    subInputs[subInputId] = { condition: ["Equal", ""], question: "", type: "Text", subInputs: {} };
+    prevForm[this.props.inputId].subInputs[subInputId] = subInputs[subInputId];
+    localStorage.setItem('form', JSON.stringify(prevForm));
+
+    this.setState({ subInputs });
+  }
+
+  renderSubInputs() {
+    return Object.keys(this.state.subInputs).map(id => (
+      <SubInput key={id} />
+    ));
   }
 
   handleDelete() {
@@ -48,11 +69,11 @@ class Input extends React.Component {
             </select>
           </div>
           <div className="input-buttons">
-            <li className="button">Add Sub-Input</li>
+            <li onClick={ this.addSubInput.bind(this) } className="button">Add Sub-Input</li>
             <li onClick={ this.handleDelete.bind(this) } className="button">Delete</li>
           </div>
         </main>
-
+        { this.renderSubInputs.bind(this)() }
       </main>
     );
   }
