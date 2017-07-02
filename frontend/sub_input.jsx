@@ -14,7 +14,7 @@ class SubInput extends React.Component {
 
   render() {
     return (
-      <main className="input">
+      <main className="input sub-input">
         <div className="input-field">
           <label>Condition</label>
           <select defaultValue={ this.state.condition[0] }>

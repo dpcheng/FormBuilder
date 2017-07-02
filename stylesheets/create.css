@@ -1,12 +1,17 @@
 
 .input {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 700px;
   border: 2px solid rgb(151, 151, 151);
   margin: 30px 0px 30px 20px;
   font-size: 26px;
-  padding: 30px;
+  padding: 15px 25px 25px 20px;
+}
+
+.sub-input {
+  left: 40px;
 }
 
 .input-field {
@@ -29,7 +34,7 @@
 .input-buttons {
   display: flex;
   justify-content: flex-end;
-  margin-right: 5px;
+  margin: 10px 5px 0px 0px;
 }
 
 .input-buttons > li {
