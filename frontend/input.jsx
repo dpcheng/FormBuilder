@@ -40,7 +40,14 @@ class Input extends React.Component {
 
   renderSubInputs() {
     return Object.keys(this.state.subInputs).map(id => (
-      <SubInput key={id} />
+      <SubInput
+        key={ id }
+        question={ this.state.subInputs[id].question }
+        condition={ this.state.subInputs[id].condition }
+        type={ this.state.subInputs[id].type }
+        subInputs={ {} }
+        path={ [this.props.inputId, id] }
+      />
     ));
   }
 
