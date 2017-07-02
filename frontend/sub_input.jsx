@@ -35,10 +35,11 @@ class SubInput extends React.Component {
       return form;
     } else {
       form[path[0]].subInputs = this.handleChange(e, f, path.slice(1), form[path[0]].subInputs);
-      this.setState({ form });
     }
 
+    this.setState({ form });
     localStorage.setItem('form', JSON.stringify(form));
+    return form;
   }
 
   addSubInput(e, f, path = this.state.path, form = this.state.form) {
@@ -57,6 +58,7 @@ class SubInput extends React.Component {
 
     this.setState({ form });
     localStorage.setItem('form', JSON.stringify(form));
+    return form;
   }
 
   deleteChild(subInputId) {
@@ -68,14 +70,15 @@ class SubInput extends React.Component {
   handleDelete(e, f, path = this.state.path, form = this.state.form) {
     if (path.length === 1) {
       delete form[path[0]];
+      this.props.deleteSelf(parseInt(path[path.length - 1]));
       return form;
     } else {
       form[path[0]].subInputs = this.handleDelete(e, f, path.slice(1), form[path[0]].subInputs);
     }
-    this.props.deleteSelf(parseInt(path[path.length - 1]));
 
     this.setState({ form });
     localStorage.setItem('form', JSON.stringify(form));
+    return form;
   }
 
   renderSubInputs() {
