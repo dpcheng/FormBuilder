@@ -25,10 +25,18 @@ class Input extends React.Component {
 
     return e => {
       if (field === "question") {
-        prevForm[this.props.inputId] = { question: e.currentTarget.value, type: this.state.type };
+        prevForm[this.props.inputId] = {
+          question: e.currentTarget.value,
+          type: this.state.type,
+          subInputs: this.state.subInputs
+        };
         this.setState({ question: e.currentTarget.value });
       } else {
-        prevForm[this.props.inputId] = { question: this.state.question, type: e.currentTarget.value };
+        prevForm[this.props.inputId] = {
+          question: this.state.question,
+          type: e.currentTarget.value,
+          subInputs: this.state.subInputs
+        };
         this.setState({ type: e.currentTarget.value });
       }
 
