@@ -57,7 +57,7 @@ class Input extends React.Component {
         question={ this.state.subInputs[id].question }
         condition={ this.state.subInputs[id].condition }
         type={ this.state.subInputs[id].type }
-        subInputs={ {} }
+        subInputs={ this.state.subInputs[id].subInputs }
         path={ [this.props.inputId, id] }
         deleteSelf={ this.deleteChild.bind(this) }
       />

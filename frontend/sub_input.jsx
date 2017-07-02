@@ -10,7 +10,26 @@ class SubInput extends React.Component {
       subInputs: this.props.subInputs,
       path: this.props.path
     };
+    this.addSubInput = this.addSubInput.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  addSubInput(e, f, path = this.state.path, form = JSON.parse(localStorage.getItem('form'))) {
+    if (path.length === 1) {
+      let subInputsIds = Object.keys(this.state.subInputs);
+      const subInputId = (subInputsIds[subInputsIds.length - 1] === undefined) ? 0 : parseInt(subInputsIds[subInputsIds.length - 1]) + 1;
+
+      let subInputs = this.state.subInputs;
+      subInputs[subInputId] = { condition: ["Equal", ""], question: "", type: "Text", subInputs: {} };
+      this.setState({ subInputs });
+      form[path[0]].subInputs[subInputId] = subInputs[subInputId];
+
+      return form;
+    } else {
+      form[path[0]].subInputs = this.addSubInput(e, f, path.slice(1), form[path[0]].subInputs);
+    }
+    localStorage.setItem('form', JSON.stringify(form));
+    return form;
   }
 
   handleDelete(e, f, path = this.state.path, form = JSON.parse(localStorage.getItem('form'))) {
@@ -52,7 +71,10 @@ class SubInput extends React.Component {
           </select>
         </div>
         <div className="input-buttons">
-          <li className="button">Add Sub-Input</li>
+          <li
+            onClick={ this.addSubInput }
+            className="button">Add Sub-Input
+          </li>
           <li
             onClick={ this.handleDelete }
             className="button">Delete
