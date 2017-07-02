@@ -5,15 +5,14 @@ import Input from './input';
 class CreateIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { form: {}, inputCount: 0};
+    this.state = { form: {} };
     this.renderInputs = this.renderInputs.bind(this);
   }
 
   componentWillMount() {
     const prevForm = JSON.parse(localStorage.getItem('form'));
-    const inputCount = parseInt(localStorage.getItem('inputCount'));
     if (prevForm) {
-      this.setState({ form: prevForm, inputCount });
+      this.setState({ form: prevForm});
     }
   }
 
@@ -36,10 +35,12 @@ class CreateIndex extends React.Component {
 
   addInput() {
     let form = this.state.form;
-    form[this.state.inputCount] = { question: "", type: "Text", subInputs: {} };
+    const inputs = Object.keys(form);
+    let inputId = (inputs[inputs.length - 1] === undefined) ? 0 : parseInt(inputs[inputs.length - 1]) + 1;
+
+    form[inputId] = { question: "", type: "Text", subInputs: {} };
     localStorage.setItem('form', JSON.stringify(this.state.form));
-    localStorage.setItem('inputCount', this.state.inputCount + 1);
-    this.setState({ form, inputCount: this.state.inputCount + 1 });
+    this.setState({ form });
   }
 
   render() {
