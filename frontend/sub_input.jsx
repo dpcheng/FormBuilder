@@ -67,10 +67,10 @@ class SubInput extends React.Component {
     this.setState({ subInputs });
   }
 
-  handleDelete(e, f, path = this.state.path, form = this.state.form) {
+  handleDelete(e, f, path = this.state.path, form = JSON.parse(localStorage.getItem('form'))) {
     if (path.length === 1) {
       delete form[path[0]];
-      this.props.deleteSelf(parseInt(path[path.length - 1]));
+      this.props.deleteSelf(parseInt(path[0]));
       return form;
     } else {
       form[path[0]].subInputs = this.handleDelete(e, f, path.slice(1), form[path[0]].subInputs);

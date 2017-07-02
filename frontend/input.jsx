@@ -47,7 +47,7 @@ class Input extends React.Component {
 
   addSubInput() {
     let prevForm = this.state.form;
-    let subInputsIds = Object.keys(this.props.subInputs);
+    let subInputsIds = Object.keys(this.state.subInputs);
     const subInputId = (subInputsIds[subInputsIds.length - 1] === undefined) ? 0 : parseInt(subInputsIds[subInputsIds.length - 1]) + 1;
 
     let subInputs = this.state.subInputs;
