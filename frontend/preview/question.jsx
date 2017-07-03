@@ -48,18 +48,33 @@ class Question extends React.Component {
 
   renderSubQuestion() {
     const subInputs = this.props.subInputs;
-    return (
-      Object.keys(subInputs).filter(id => (
-        this.state.answer === subInputs[id].condition[1]
-      )).map(id => (
-        <Question
-          key={ id }
-          question={ subInputs[id].question }
-          type={ subInputs[id].type }
-          subInputs={ subInputs[id].subInputs }
-        />
-      ))
+    const conditionFulfilledIds = Object.keys(subInputs)
+      .filter(id => {
+        const condition = subInputs[id].condition;
+        let conditionFulfilled = false;
+
+        if (condition[0] === "Less Than") {
+          conditionFulfilled =  parseInt(this.state.answer) <
+            parseInt(condition[1]);
+        } else if (condition[0] === "More Than") {
+          conditionFulfilled =  parseInt(this.state.answer) >
+            parseInt(condition[1]);
+        } else {
+          conditionFulfilled =  this.state.answer === condition[1];
+        }
+
+        return conditionFulfilled;
+      }
     );
+
+    return conditionFulfilledIds.map(id => (
+      <Question
+        key={ id }
+        question={ subInputs[id].question }
+        type={ subInputs[id].type }
+        subInputs={ subInputs[id].subInputs }
+      />
+    ));
   }
 
   render() {
