@@ -21,6 +21,10 @@ class Index extends React.Component {
       this.deselectTab();
       e.currentTarget.className = "tab-selected";
       this.setState({ tab: e.currentTarget.textContent });
+    } else if ( e.currentTarget.textContent === "Preview"
+    && this.state.tab === "Preview" ) {
+      this.state.tab = "";
+      this.setState({ tab: "Preview" });
     }
   }
 
@@ -28,7 +32,7 @@ class Index extends React.Component {
     if (this.state.tab === "Create") {
       return <CreateIndex />;
     } else if (this.state.tab === "Preview") {
-      return <PreviewIndex />;
+      return <PreviewIndex key={ new Date().getTime() }/>;
     } else {
       return <ExportIndex />;
     }

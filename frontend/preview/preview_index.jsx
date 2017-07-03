@@ -5,10 +5,12 @@ import Question from './question';
 class PreviewIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { form: JSON.parse(localStorage.getItem('form'))};
+    this.state = {
+      form: JSON.parse(localStorage.getItem('form'))
+    };
   }
 
-  renderTopLevelQuestions() {
+  renderQuestions() {
     return Object.keys(this.state.form).map(id => (
       <Question
         key={ id }
@@ -22,7 +24,7 @@ class PreviewIndex extends React.Component {
   render() {
     return (
       <main>
-        { this.renderTopLevelQuestions.bind(this)() }
+        { this.renderQuestions.bind(this)() }
       </main>
     );
   }
