@@ -4,22 +4,40 @@ class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = { answer: "" };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ answer: e.currentTarget.value });
   }
 
   renderField() {
     if (this.props.type === "Yes/No") {
       return <div>
         <label>
-          <input type="radio"></input>
+          <input
+            type="radio"
+            name="Yes/No"
+            value="Yes"
+            onClick={ this.handleChange }
+          ></input>
           Yes
         </label>
         <labeL>
-          <input type="radio"></input>
+          <input
+            type="radio"
+            name="Yes/No"
+            value="No"
+            onClick={ this.handleChange }
+          ></input>
           No
         </labeL>
       </div>;
     } else {
-      return <input type="text" ></input>;
+      return <input
+        type="text"
+        onChange={ this.handleChange }
+      ></input>;
     }
   }
 
