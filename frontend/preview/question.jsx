@@ -59,7 +59,7 @@ class Question extends React.Component {
         if (condition[0] === "Less Than") {
           conditionFulfilled =  parseInt(this.state.answer) <
             parseInt(condition[1]);
-        } else if (condition[0] === "More Than") {
+        } else if (condition[0] === "Greater Than") {
           conditionFulfilled =  parseInt(this.state.answer) >
             parseInt(condition[1]);
         } else {

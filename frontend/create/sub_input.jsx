@@ -55,7 +55,7 @@ class SubInput extends React.Component {
       const subInputId = (subInputsIds[subInputsIds.length - 1] === undefined) ? 0 : parseInt(subInputsIds[subInputsIds.length - 1]) + 1;
 
       let subInputs = this.state.subInputs;
-      subInputs[subInputId] = { condition: ["Equal", ""], question: "", type: "Text", subInputs: {} };
+      subInputs[subInputId] = { condition: ["Equals", ""], question: "", type: "Text", subInputs: {} };
       this.setState({ subInputs });
       form[path[0]].subInputs[subInputId] = subInputs[subInputId];
       return form;
@@ -79,7 +79,7 @@ class SubInput extends React.Component {
       delete form[path[0]];
       this.props.deleteSelf(parseInt(path[0]));
       return form;
-      
+
     } else {
       form[path[0]].subInputs = this.handleDelete(e, f, path.slice(1), form[path[0]].subInputs);
     }
@@ -114,9 +114,9 @@ class SubInput extends React.Component {
               defaultValue={ this.state.condition[0] }
               onChange={ this.handleChange }
             >
-              <option>Equal</option>
+              <option>Equals</option>
               <option>Less Than</option>
-              <option>More Than</option>
+              <option>Greater Than</option>
             </select>
             <input
               className="condition-val"
