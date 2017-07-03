@@ -34,11 +34,29 @@ class Question extends React.Component {
         </labeL>
       </div>;
     } else {
-      return <input
-        type="text"
-        onChange={ this.handleChange }
-      ></input>;
+      return <div>
+        <input
+          type="text"
+          onChange={ this.handleChange }
+          ></input>
+      </div>;
     }
+  }
+
+  renderSubQuestion() {
+    const subInputs = this.props.subInputs;
+    return (
+      Object.keys(subInputs).filter(id => (
+        this.state.answer === subInputs[id].condition[1]
+      )).map(id => (
+        <Question
+          key={ id }
+          question={ subInputs[id].question }
+          type={ subInputs[id].type }
+          subInputs={ subInputs[id].subInputs }
+        />
+      ))
+    );
   }
 
   render() {
@@ -48,6 +66,7 @@ class Question extends React.Component {
           { this.props.question }
         </div>
           { this.renderField.bind(this)() }
+          { this.renderSubQuestion.bind(this)() }
       </main>
     );
   }
