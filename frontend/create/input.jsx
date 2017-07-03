@@ -19,27 +19,27 @@ class Input extends React.Component {
     this.setState({ subInputs });
   }
 
-  handleChange(field) {
-    return e => {
-      const prevForm = JSON.parse(localStorage.getItem('form'));
-      if (field === "question") {
-        prevForm[this.props.inputId] = {
-          question: e.currentTarget.value,
-          type: this.state.type,
-          subInputs: this.state.subInputs
-        };
-
-        this.setState({ question: e.currentTarget.value });
-      } else {
-        prevForm[this.props.inputId] = {
-          question: this.state.question,
-          type: e.currentTarget.value,
-          subInputs: this.state.subInputs
-        };
-        this.setState({ type: e.currentTarget.value });
-      }
-      localStorage.setItem('form', JSON.stringify(prevForm));
-    };
+  handleChange(e) {
+    let field = e.currentTarget.className;
+    const prevForm = JSON.parse(localStorage.getItem('form'));
+    if (field === "input-question") {
+      prevForm[this.props.inputId] = {
+        question: e.currentTarget.value,
+        type: this.state.type,
+        subInputs: this.state.subInputs
+      };
+      this.state.question = e.currentTarget.value;
+    } else {
+      prevForm[this.props.inputId] = {
+        question: this.state.question,
+        type: e.currentTarget.value,
+        subInputs: this.state.subInputs
+      };
+      this.state.type = e.currentTarget.value;
+    }
+    localStorage.setItem('form', JSON.stringify(prevForm));
+    let { type, question, subInputs } = prevForm[this.props.inputId];
+    this.setState({ type, question, subInputs });
   }
 
   addSubInput() {
@@ -83,11 +83,20 @@ class Input extends React.Component {
         <main className="input">
           <div className="input-field">
             <label>Question</label>
-            <input onChange={ this.handleChange("question") } type="text" defaultValue={ this.state.question }></input>
+            <input
+              className="input-question"
+              onChange={ this.handleChange }
+              type="text"
+              defaultValue={ this.state.question }
+            ></input>
           </div>
           <div className="input-field">
             <label>Type</label>
-            <select onChange={ this.handleChange("type" )} defaultValue={ this.state.type }>
+            <select
+              className="input-type"
+              onChange={ this.handleChange }
+              defaultValue={ this.state.type }
+            >
               <option>Text</option>
               <option>Number</option>
               <option>Yes/No</option>
