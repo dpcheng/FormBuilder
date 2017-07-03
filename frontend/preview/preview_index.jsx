@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Question from './question';
+
 class PreviewIndex extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +10,12 @@ class PreviewIndex extends React.Component {
 
   renderTopLevelQuestions() {
     return Object.keys(this.state.form).map(id => (
-      id
+      <Question
+        key={ id }
+        question={ this.state.form[id].question }
+        type={ this.state.form[id].type }
+        subInputs={ this.state.form[id].subInputs }
+      />
     ));
   }
 
