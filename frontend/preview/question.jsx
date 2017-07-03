@@ -12,13 +12,15 @@ class Question extends React.Component {
   }
 
   renderField() {
+    const time = new Date().getTime();
+
     if (this.props.type === "Yes/No") {
       return <div>
         <label className="preview-label">
           <input
             className="preview-radio"
             type="radio"
-            name="Yes/No"
+            name={ time }
             value="Yes"
             onClick={ this.handleChange }
           ></input>
@@ -28,7 +30,7 @@ class Question extends React.Component {
           <input
             className="preview-radio"
             type="radio"
-            name="Yes/No"
+            name={ time }
             value="No"
             onClick={ this.handleChange }
           ></input>
