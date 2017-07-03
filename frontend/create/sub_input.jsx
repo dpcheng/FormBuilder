@@ -19,20 +19,27 @@ class SubInput extends React.Component {
   handleChange(e, f, path = this.state.path, form = JSON.parse(localStorage.getItem('form'))) {
     const field = e.currentTarget.className;
     const val = e.currentTarget.value;
+
     if (path.length === 1) {
       let condition = this.state.condition;
+
       if (field === "question") {
         form[path[0]].question = val;
+
       } else if (field === "condition") {
         condition[0] = val;
         form[path[0]].condition = condition;
+
       } else if (field === "condition-val") {
         condition[1] = val;
         form[path[0]].condition = condition;
+
       } else {
         form[path[0]].type = val;
       }
+
       return form;
+
     } else {
       form[path[0]].subInputs = this.handleChange(e, f, path.slice(1), form[path[0]].subInputs);
     }
@@ -72,6 +79,7 @@ class SubInput extends React.Component {
       delete form[path[0]];
       this.props.deleteSelf(parseInt(path[0]));
       return form;
+      
     } else {
       form[path[0]].subInputs = this.handleDelete(e, f, path.slice(1), form[path[0]].subInputs);
     }

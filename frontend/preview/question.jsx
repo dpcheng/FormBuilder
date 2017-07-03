@@ -37,6 +37,7 @@ class Question extends React.Component {
           No
         </labeL>
       </div>;
+
     } else {
       return <div>
         <input

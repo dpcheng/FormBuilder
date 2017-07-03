@@ -20,34 +20,39 @@ class Input extends React.Component {
   }
 
   handleChange(e) {
-    let field = e.currentTarget.className;
+    const field = e.currentTarget.className;
+    const val = e.currentTarget.value;
+    const inputId = this.props.inputId;
     const prevForm = JSON.parse(localStorage.getItem('form'));
+
     if (field === "input-question") {
-      prevForm[this.props.inputId] = {
-        question: e.currentTarget.value,
+      prevForm[inputId] = {
+        question: val,
         type: this.state.type,
         subInputs: this.state.subInputs
       };
-      this.state.question = e.currentTarget.value;
+      this.state.question = val;
+
     } else {
-      prevForm[this.props.inputId] = {
+      prevForm[inputId] = {
         question: this.state.question,
-        type: e.currentTarget.value,
+        type: val,
         subInputs: this.state.subInputs
       };
-      this.state.type = e.currentTarget.value;
+      this.state.type = val;
     }
+
     localStorage.setItem('form', JSON.stringify(prevForm));
-    let { type, question, subInputs } = prevForm[this.props.inputId];
+    let { type, question, subInputs } = prevForm[inputId];
     this.setState({ type, question, subInputs });
   }
 
   addSubInput() {
     let prevForm = JSON.parse(localStorage.getItem('form'));
-    let subInputsIds = Object.keys(this.state.subInputs);
+    const subInputsIds = Object.keys(this.state.subInputs);
     const subInputId = (subInputsIds[subInputsIds.length - 1] === undefined) ? 0 : parseInt(subInputsIds[subInputsIds.length - 1]) + 1;
-
     let subInputs = this.state.subInputs;
+
     subInputs[subInputId] = { condition: ["Equal", ""], question: "", type: "Text", subInputs: {} };
     prevForm[this.props.inputId].subInputs[subInputId] = subInputs[subInputId];
     this.setState({ subInputs });
