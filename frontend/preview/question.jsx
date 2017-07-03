@@ -14,8 +14,9 @@ class Question extends React.Component {
   renderField() {
     if (this.props.type === "Yes/No") {
       return <div>
-        <label>
+        <label className="preview-label">
           <input
+            className="preview-radio"
             type="radio"
             name="Yes/No"
             value="Yes"
@@ -23,8 +24,9 @@ class Question extends React.Component {
           ></input>
           Yes
         </label>
-        <labeL>
+        <labeL className="preview-label">
           <input
+            className="preview-radio"
             type="radio"
             name="Yes/No"
             value="No"
@@ -36,6 +38,7 @@ class Question extends React.Component {
     } else {
       return <div>
         <input
+          className="preview-field"
           type="text"
           onChange={ this.handleChange }
           ></input>
@@ -61,7 +64,7 @@ class Question extends React.Component {
 
   render() {
     return (
-      <main>
+      <main className="preview-question">
         <div>
           { this.props.question }
         </div>
