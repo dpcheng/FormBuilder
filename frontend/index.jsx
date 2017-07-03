@@ -1,8 +1,8 @@
 import React from 'react';
 
-import CreateIndex from './create_index';
-import PreviewIndex from './preview_index';
-import ExportIndex from './export_index';
+import CreateIndex from './create/create_index';
+import PreviewIndex from './preview/preview_index';
+import ExportIndex from './export/export_index';
 
 class Index extends React.Component {
   constructor(props) {
