@@ -34,7 +34,7 @@ class CreateIndex extends React.Component {
   }
 
   addInput() {
-    let form = JSON.parse(localStorage.getItem('form'));
+    let form = JSON.parse(localStorage.getItem('form')) || this.state.form;
     const inputs = Object.keys(form);
     const inputId = (inputs[inputs.length - 1] === undefined) ? 0 : parseInt(inputs[inputs.length - 1]) + 1;
 
